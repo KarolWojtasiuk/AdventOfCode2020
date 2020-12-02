@@ -7,7 +7,7 @@ namespace AdventOfCode2020
     {
         static void Main(string[] args)
         {
-            var day = 0;
+            int day;
             try
             {
                 day = Int32.Parse(args[0]);
@@ -18,7 +18,7 @@ namespace AdventOfCode2020
                 return;
             }
 
-            var type = Type.GetType($"Day{day}");
+            var type = Type.GetType($"{nameof(AdventOfCode2020)}.Day{day}");
 
             if (type is null)
             {
@@ -26,7 +26,7 @@ namespace AdventOfCode2020
                 return;
             }
 
-            if (Activator.CreateInstance(type) is not IDay solution)
+            if (Activator.CreateInstance(type) is not Day solution)
             {
                 Console.WriteLine($"Day{day} solution does not exist!");
                 return;
