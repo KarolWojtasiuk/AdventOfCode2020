@@ -32,7 +32,7 @@ namespace AdventOfCode2020
                 return;
             }
 
-            solution.Calculate();
+            Console.WriteLine(solution.Calculate());
         }
     }
 }
