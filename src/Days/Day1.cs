@@ -10,7 +10,7 @@ namespace AdventOfCode2020
             return $"{CalculatePart1()} | {CalculatePart2()}";
         }
 
-        private string CalculatePart1()
+        private int CalculatePart1()
         {
             var result = 0;
             var numbers = InputLines.Select(s => Int32.Parse(s));
@@ -25,10 +25,10 @@ namespace AdventOfCode2020
                 }
             }
 
-            return result.ToString();
+            return result;
         }
 
-        private string CalculatePart2()
+        private int CalculatePart2()
         {
             var result = 0;
             var numbers = InputLines.Select(s => Int32.Parse(s));
@@ -47,7 +47,7 @@ namespace AdventOfCode2020
                 }
             }
 
-            return result.ToString();
+            return result;
         }
     }
 }

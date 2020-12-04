@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 namespace AdventOfCode2020
@@ -9,7 +10,11 @@ namespace AdventOfCode2020
             get
             {
                 var fileName = $"input/{GetType().Name}.txt";
-                return File.ReadAllLines(fileName);
+
+                var reader = new StreamReader(fileName);
+                var file = reader.ReadToEnd();
+
+                return file.Split(Environment.NewLine);
             }
         }
 
