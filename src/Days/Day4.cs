@@ -1,25 +1,20 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace AdventOfCode2020
 {
     public class Day4 : Day
     {
-        public override string Calculate()
-        {
-            return $"{CalculatePart1()} | {CalculatePart2()}";
-        }
-
-        private int CalculatePart1()
+        public override object CalculatePart1()
         {
             var passports = ParseInput();
 
             return passports.Count(p => HasRequiredFields(p));
         }
 
-        private int CalculatePart2()
+        public override object CalculatePart2()
         {
             var passports = ParseInput();
 

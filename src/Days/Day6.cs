@@ -1,23 +1,18 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace AdventOfCode2020
 {
     public class Day6 : Day
     {
-        public override string Calculate()
-        {
-            return $"{CalculatePart1()} | {CalculatePart2()}";
-        }
-
-        private int CalculatePart1()
+        public override object CalculatePart1()
         {
             var groups = ParseInput();
             return groups.Select(g => g.UniqueAnswersCount).Sum();
         }
 
-        private int CalculatePart2()
+        public override object CalculatePart2()
         {
             var groups = ParseInput();
             return groups.Select(g => g.EveryoneCorrectAnswersCount).Sum();

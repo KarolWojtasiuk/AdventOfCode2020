@@ -1,20 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace AdventOfCode2020
 {
     public class Day5 : Day
     {
-        public override string Calculate()
-        {
-            return $"{CalculatePart1()} | {CalculatePart2()}";
-        }
-
-        private int CalculatePart1()
+        public override object CalculatePart1()
         {
             var highestId = 0;
-            foreach (var line in InputLines.Where(l => !String.IsNullOrWhiteSpace(l)))
+            foreach (var line in ParseInput())
             {
                 var currentId = GetSeat(line).Id;
                 if (GetSeat(line).Id > highestId)
@@ -25,10 +20,10 @@ namespace AdventOfCode2020
             return highestId;
         }
 
-        private int CalculatePart2()
+        public override object CalculatePart2()
         {
             var ids = new List<int>();
-            foreach (var line in InputLines.Where(l => !String.IsNullOrWhiteSpace(l)))
+            foreach (var line in ParseInput())
             {
                 ids.Add(GetSeat(line).Id);
             }
@@ -36,9 +31,13 @@ namespace AdventOfCode2020
             return ids.First(id => !ids.Contains(id + 1) && ids.Contains(id + 2)) + 1;
         }
 
+        private List<string> ParseInput()
+        {
+            return InputLines.Where(l => !String.IsNullOrWhiteSpace(l)).ToList();
+        }
+
         private static Seat GetSeat(string code)
         {
-            Console.WriteLine(code);
             var row = code[0..7];
             var column = code[7..];
 

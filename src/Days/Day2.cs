@@ -1,60 +1,53 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace AdventOfCode2020
 {
     public class Day2 : Day
     {
-        public override string Calculate()
+        public override object CalculatePart1()
         {
-            return $"{CalculatePart1()} | {CalculatePart2()}";
-        }
-
-        private int CalculatePart1()
-        {
-
+            var passwords = ParseInput();
             var validPasswords = 0;
 
-            foreach (var line in InputLines.Select(l => l.Split(' ')))
+            foreach (var password in passwords)
             {
-                var lowestNumber = Int32.Parse(line[0].Split('-')[0]);
-                var highestNumber = Int32.Parse(line[0].Split('-')[1]);
-                var letter = line[1][0];
-                var password = line[2];
-
-                var letterCount = password.Count(l => l == letter);
-
-                if (letterCount >= lowestNumber && letterCount <= highestNumber)
+                if (password.Content is not null)
                 {
-                    validPasswords++;
+
+                    var letterCount = password.Content.Count(l => l == password.Letter);
+
+                    if (letterCount >= password.LowestNumber && letterCount <= password.HighestNumber)
+                    {
+                        validPasswords++;
+                    }
                 }
             }
 
             return validPasswords;
         }
 
-        private int CalculatePart2()
+        public override object CalculatePart2()
         {
-
+            var passwords = ParseInput();
             var validPasswords = 0;
 
-            foreach (var line in InputLines.Select(l => l.Split(' ')))
+            foreach (var password in passwords)
             {
-                var lowestNumber = Int32.Parse(line[0].Split('-')[0]);
-                var highestNumber = Int32.Parse(line[0].Split('-')[1]);
-                var letter = line[1][0];
-                var password = line[2];
-
                 var matches = 0;
 
-                if (password[lowestNumber - 1] == letter)
+                if (password.Content is not null)
                 {
-                    matches++;
-                }
+                    if (password.Content[password.LowestNumber - 1] == password.Letter)
+                    {
+                        matches++;
+                    }
 
-                if (password[highestNumber - 1] == letter)
-                {
-                    matches++;
+                    if (password.Content[password.HighestNumber - 1] == password.Letter)
+                    {
+                        matches++;
+                    }
                 }
 
                 if (matches == 1)
@@ -65,5 +58,33 @@ namespace AdventOfCode2020
 
             return validPasswords;
         }
+
+        private List<Password> ParseInput()
+        {
+            var input = InputLines.Where(s => !String.IsNullOrWhiteSpace(s)).Select(l => l.Split(' '));
+
+            var passwords = new List<Password>();
+
+            foreach (var line in input)
+            {
+                passwords.Add(new()
+                {
+                    LowestNumber = Int32.Parse(line[0].Split('-')[0]),
+                    HighestNumber = Int32.Parse(line[0].Split('-')[1]),
+                    Letter = line[1][0],
+                    Content = line[2]
+                });
+            }
+
+            return passwords;
+        }
+    }
+
+    public class Password
+    {
+        public int LowestNumber { get; set; }
+        public int HighestNumber { get; set; }
+        public char Letter { get; set; }
+        public string? Content { get; set; }
     }
 }

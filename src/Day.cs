@@ -18,6 +18,13 @@ namespace AdventOfCode2020
             }
         }
 
-        public abstract string Calculate();
+        public string Calculate()
+        {
+            return $"{CalculatePart1()} | {CalculatePart2()}";
+        }
+
+        public abstract object CalculatePart1();
+
+        public abstract object CalculatePart2();
     }
 }

@@ -1,19 +1,15 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace AdventOfCode2020
 {
     public class Day1 : Day
     {
-        public override string Calculate()
-        {
-            return $"{CalculatePart1()} | {CalculatePart2()}";
-        }
-
-        private int CalculatePart1()
+        public override object CalculatePart1()
         {
             var result = 0;
-            var numbers = InputLines.Select(s => Int32.Parse(s));
+            var numbers = ParseInput();
 
             foreach (var firstNumber in numbers)
             {
@@ -28,10 +24,10 @@ namespace AdventOfCode2020
             return result;
         }
 
-        private int CalculatePart2()
+        public override object CalculatePart2()
         {
             var result = 0;
-            var numbers = InputLines.Select(s => Int32.Parse(s));
+            var numbers = ParseInput();
 
             foreach (var firstNumber in numbers)
             {
@@ -48,6 +44,11 @@ namespace AdventOfCode2020
             }
 
             return result;
+        }
+
+        private List<int> ParseInput()
+        {
+            return InputLines.Where(s => !String.IsNullOrWhiteSpace(s)).Select(s => Int32.Parse(s)).ToList();
         }
     }
 }
